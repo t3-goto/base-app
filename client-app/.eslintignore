@@ -1,10 +1,13 @@
+# _______________________________
 # webpack
 ./webpack.base.config.js
 ./webpack.dev.config.js
 ./webpack.prod.config.js
 
+# _______________________________
 # dist
 ./dist/
 
+# _______________________________
 # node_modules
 ./node_modules/

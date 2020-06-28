@@ -1,41 +1,61 @@
 {
+  // ________________________________________________
+  // 環境設定（静的検証の前提条件）
   "env": {
     "browser": true,
     "node": true,
     "es6": true
   },
+  // ________________________________________________
+  // 継承設定
   "extends": [
+    // Airbnbのルールセット
     "airbnb",
+    // TypeScriptの型情報不要の推奨ルールセット
     "plugin:@typescript-eslint/recommended",
+    // Prettierの推奨ルールセット
     "plugin:prettier/recommended",
     "prettier/@typescript-eslint",
     "prettier/react"
   ],
+  // ________________________________________________
+  // Pluginの設定
   "plugins": ["prettier", "@typescript-eslint"],
+  // ________________________________________________
+  // Parserの設定
   "parser": "@typescript-eslint/parser",
+  // ________________________________________________
+  // ParserOptionの設定
   "parserOptions": {
+    // JSXの有効化
     "ecmaFeatures": {
       "jsx": true
     },
+    "useJSXTextNode": true,
+    // ES2016の構文の有効化
     "ecmaVersion": 2015,
-    "projext": "./tsconfig.json",
-    "useJSXTextNode": true
+    // 型情報ファイルの有効化
+    "projext": "./tsconfig.json"
   },
+  // ________________________________________________
+  // settingsの設定
   "settings": {
     "import/resolver": {
-      // webpackの設定を利用する（インポートの解決を可能とする）
+      // Webpackの設定有効化（インポートの解決を可能とする）
       "webpack": {
         "config": "webpack.dev.config.js"
       },
-      //  js/jsx/json/ts/tsxの拡張子のインポートを省略可能とする
+      //  インポート時の拡張子の省略の有効化（js/jsx/json/ts/tsx）
       "node": {
         "paths": ["src"],
         "import/extensions": [".js", ".jsx", ".json", ".ts", ".tsx"]
       }
     }
   },
+  // ________________________________________________
+  // ルール定義
   "rules": {
-    //  js/jsx/json/ts/tsxの拡張子のインポートを省略可能とする
+    //  インポート時の拡張子の省略の有効化（js/jsx/json/ts/tsx）
     "import/extensions": [
       "error",
       {
@@ -46,14 +66,14 @@
         "tsx": "never"
       }
     ],
-    // JSX/TSXの拡張子を利用可能とする
+    // JSX/TSXの拡張子の有効化
     "react/jsx-filename-extension": [
       "error",
       {
         "extensions": [".jsx", ".tsx"]
       }
     ],
-    // consoleを利用可能とする
+    // console.logを利用可能とする
     "no-console": "off",
     // devDependenciesのimportを許可する
     "import/no-extraneous-dependencies": [
@@ -64,14 +84,17 @@
       }
     ]
   },
-  // webpack.*.jsに対する設定を上書きする
+  // ________________________________________________
+  // ルールの上書き設定（webpack.*.js）
   "overrides": [
     {
       "files": ["webpack.*.js"],
       "rules": {
-        // no-var-requiresを無効にする（requireを利用可能とする）
+        // no-unused-varsの無効化（未利用変数を定義可能とする）
+        "@typescript-eslint/no-unused-vars": "off",
+        // no-var-requiresの無効化（requireを利用可能とする）
         "@typescript-eslint/no-var-requires": "off",
-        // no-extraneous-dependenciesを無効にする（組み込みライブラリのインポートを可能とする）
+        // no-extraneous-dependenciesの無効化（組み込みライブラリのインポートを可能とする）
         "import/no-extraneous-dependencies": "off"
       }
     }
