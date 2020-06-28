@@ -41,7 +41,7 @@ module.exports = {
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        use: [MiniCSSExtractPlugin.loader, 'css-loader'],
+        use: [MiniCSSExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       // ______________________________________________
       // url-loaderの設定
