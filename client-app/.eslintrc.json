@@ -8,7 +8,8 @@
     "airbnb",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "prettier/@typescript-eslint",
+    "prettier/react"
   ],
   "plugins": ["prettier", "@typescript-eslint"],
   "parser": "@typescript-eslint/parser",
@@ -20,5 +21,59 @@
     "projext": "./tsconfig.json",
     "useJSXTextNode": true
   },
-  "rules": {}
+  "settings": {
+    "import/resolver": {
+      // webpackの設定を利用する（インポートの解決を可能とする）
+      "webpack": {
+        "config": "webpack.dev.config.js"
+      },
+      //  js/jsx/json/ts/tsxの拡張子のインポートを省略可能とする
+      "node": {
+        "paths": ["src"],
+        "import/extensions": [".js", ".jsx", ".json", ".ts", ".tsx"]
+      }
+    }
+  },
+  "rules": {
+    //  js/jsx/json/ts/tsxの拡張子のインポートを省略可能とする
+    "import/extensions": [
+      "error",
+      {
+        "js": "never",
+        "jsx:": "never",
+        "json": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    // JSX/TSXの拡張子を利用可能とする
+    "react/jsx-filename-extension": [
+      "error",
+      {
+        "extensions": [".jsx", ".tsx"]
+      }
+    ],
+    // consoleを利用可能とする
+    "no-console": "off",
+    // devDependenciesのimportを許可する
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true,
+        "optionalDependencies": false
+      }
+    ]
+  },
+  // webpack.*.jsに対する設定を上書きする
+  "overrides": [
+    {
+      "files": ["webpack.*.js"],
+      "rules": {
+        // no-var-requiresを無効にする（requireを利用可能とする）
+        "@typescript-eslint/no-var-requires": "off",
+        // no-extraneous-dependenciesを無効にする（組み込みライブラリのインポートを可能とする）
+        "import/no-extraneous-dependencies": "off"
+      }
+    }
+  ]
 }
