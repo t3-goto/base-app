@@ -1,0 +1,86 @@
+{
+  // ________________________________________________
+  // 環境設定（静的検証の前提条件）
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  // ________________________________________________
+  // 継承設定
+  "extends": [
+    // Airbnb-baseのルールセット
+    "airbnb-base",
+    // TypeScriptの型情報不要の推奨ルールセット
+    "plugin:@typescript-eslint/recommended",
+    // Prettierの推奨ルールセット
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint"
+  ],
+  // ________________________________________________
+  // Pluginの設定
+  "plugins": ["prettier", "@typescript-eslint"],
+  // ________________________________________________
+  // Parserの設定
+  "parser": "@typescript-eslint/parser",
+  // ________________________________________________
+  // ParserOptionの設定
+  "parserOptions": {
+    // ES2016の構文の有効化
+    "ecmaVersion": 2015,
+    // 型情報ファイルの有効化
+    "projext": "./tsconfig.json"
+  },
+  // ________________________________________________
+  // settingsの設定
+  "settings": {
+    "import/resolver": {
+      // Webpackの設定有効化（インポートの解決を可能とする）
+      "webpack": {
+        "config": "webpack.dev.config.js"
+      },
+      //  インポート時の拡張子の省略の有効化（js/json/ts）
+      "node": {
+        "paths": ["src"],
+        "import/extensions": [".js", ".json", ".ts"]
+      }
+    }
+  },
+  // ________________________________________________
+  // ルール定義
+  "rules": {
+    //  インポート時の拡張子の省略の有効化（js/json/ts）
+    "import/extensions": [
+      "error",
+      {
+        "js": "never",
+        "json": "never",
+        "ts": "never"
+      }
+    ],
+    // console.logを利用可能とする
+    "no-console": "off",
+    // devDependenciesのimportを許可する
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true,
+        "optionalDependencies": false
+      }
+    ]
+  },
+  // ________________________________________________
+  // ルールの上書き設定（webpack.*）
+  "overrides": [
+    {
+      "files": ["webpack.*"],
+      "rules": {
+        // no-unused-varsの無効化（未利用変数を定義可能とする）
+        "@typescript-eslint/no-unused-vars": "off",
+        // no-var-requiresの無効化（requireを利用可能とする）
+        "@typescript-eslint/no-var-requires": "off",
+        // no-extraneous-dependenciesの無効化（組み込みライブラリのインポートを可能とする）
+        "import/no-extraneous-dependencies": "off"
+      }
+    }
+  ]
+}

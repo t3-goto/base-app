@@ -1,0 +1,7 @@
+# _______________________________
+# node_modules
+node_modules/
+
+# _______________________________
+# dist directory
+dist/
