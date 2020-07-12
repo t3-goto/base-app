@@ -8,7 +8,7 @@ module.exports = merge(baseConfig, {
   // エントリーポイントの設定
   entry: [
     path.resolve(__dirname, 'src/app.ts'),
-    'webpack-hot-middleware/client',
+    'webpack-hot-middleware/client?reload=true&timeout=1000',
   ],
   // ________________________________________________
   // モード設定

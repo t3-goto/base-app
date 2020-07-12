@@ -25,7 +25,7 @@
   // ________________________________________________
   // ParserOptionの設定
   "parserOptions": {
-    // ES2016の構文の有効化
+    // ES2015の構文の有効化
     "ecmaVersion": 2015,
     // 型情報ファイルの有効化
     "projext": "./tsconfig.json"
@@ -53,26 +53,42 @@
       "error",
       {
         "js": "never",
-        "json": "never",
+        "json": "always",
         "ts": "never"
       }
     ],
     // console.logを利用可能とする
     "no-console": "off",
-    // devDependenciesのimportを許可する
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "devDependencies": true,
-        "optionalDependencies": false
-      }
-    ]
+    // // devDependenciesのimportを許可する
+    // "import/no-extraneous-dependencies": [
+    //   "error",
+    //   {
+    //     "devDependencies": true,
+    //     "optionalDependencies": false
+    //   }
+    // ],
+    // no-extraneous-dependenciesの無効化（組み込みライブラリのインポートを可能とする）
+    "import/no-extraneous-dependencies": "off",
+    // default export推奨を無効化する
+    "import/prefer-default-export": "off",
+    // 未使用変数のチェックの無効化
+    "@typescript-eslint/no-unused-vars": "off",
+    // any利用不可の無効化
+    "@typescript-eslint/no-explicit-any": "off",
+    // 1ファイルあたりのクラス数を1以上可能とする
+    "max-classes-per-file": "off",
+    // Custom module and namespaceを禁止ルールを無効化（ES2015では不要）
+    "@typescript-eslint/no-namespace": "off",
+    // クラスメソッドでthisを強制しない
+    "class-methods-use-this": "off",
+    // コンストラクタ－の処理を強制しない
+    "no-useless-constructor": "off"
   },
   // ________________________________________________
   // ルールの上書き設定（webpack.*）
   "overrides": [
     {
-      "files": ["webpack.*"],
+      "files": ["webpack*"],
       "rules": {
         // no-unused-varsの無効化（未利用変数を定義可能とする）
         "@typescript-eslint/no-unused-vars": "off",

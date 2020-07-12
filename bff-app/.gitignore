@@ -1,7 +1,23 @@
-# _______________________________
-# node_modules
+#
+# TODO:開発後に必要分を足す。開発前に見えているものだけ登録した。
+#
+#
+# Node files
+#
 node_modules/
+yarn-error.log
+.env
 
-# _______________________________
-# dist directory
+#
+# dist directories and files
+#
 dist/
+
+#
+# OS generated files
+#
+.DS_Store
+Thumbs.db
+
+# Generated source-code
+coverage/

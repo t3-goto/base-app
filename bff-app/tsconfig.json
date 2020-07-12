@@ -6,8 +6,8 @@
     "target": "es5",
     // module:トランスパイル後のJavaScriptのモジュール形式（CommonJSに変換する）
     "module": "commonjs",
-    // lib:トランスパイル時のincludeライブラリ。（TypeScirptでES2020とdomの機能を利用可能とする）
-    "lib": ["es2020", "dom"],
+    // lib:トランスパイル時のincludeライブラリ。（TypeScirptでES2015とdomの機能を利用可能とする）
+    "lib": ["es2015", "dom"],
     // sourceMap:ソースマップ出力の有効化
     "sourceMap": true,
     // dist:出力先ディレクトリの設定
@@ -16,12 +16,28 @@
     "strict": true,
     // noUnuesdParameters:未使用引数チェックの無効化
     "noUnusedParameters": false,
-    // moduleResolution:モジュールシステムの解決方法（node,npmを利用してモジュール解決）
+    // noImplicitAny:暗黙のanyチェックの無効化
+    "noImplicitAny": false,
+    //noUnusedLocals:未使用変数チェックの無効化
+    "noUnusedLocals": false,
+    // 厳密なプロパティ初期化時の型チェックを無効か
+    "strictPropertyInitialization": false,
+    // moduleResolution：モジュール解決をnodeとする
     "moduleResolution": "node",
     // esModuleInterop:CommonJSとESModuleの相互運用性を有効化
     "esModuleInterop": true,
     // forceConsistentCasingInFileNames:ファイル参照時の大文字小文字区別の有効化
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    // importHepers:tslibをヘルパーとして有効化
+    "importHelpers": true,
+    // baseUrl:相対モジュール名を解決するベースディレクトリの設定
+    "baseUrl": ".",
+    // resolveJsonModule:JSON形式のモジュールを有効化
+    "resolveJsonModule": true,
+    // experimentalDecorators:実験的な機能「ES7 decorators」の有効化（routing-controllersに必要）
+    "experimentalDecorators": true,
+    // emitDecoratorMetadata:実験的な機能「emitting type metadata for decorators」の有効化（routing-controllersに必要）
+    "emitDecoratorMetadata": true
   },
   // _________________________________________________
   // includeの設定

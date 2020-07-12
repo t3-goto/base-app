@@ -1,18 +1,36 @@
-import Express from 'express';
-import webpack from './lib/webpack';
+import 'reflect-metadata';
 
-const app = Express();
+import { bootstrapMicroframework } from 'microframework';
+import { winstonLoader } from './loaders/winstonLoader';
+import { iocLoader } from './loaders/iocLoader';
+import { expressLoader } from './loaders/expressLoader';
+import { webpackLoader } from './loaders/webpackLoader';
+import { monitorLoader } from './loaders/monitorLoader';
 
-webpack(app);
+import { Logger } from './lib/logger';
+import { banner } from './lib/banner';
+import { swaggerLoader } from './loaders/swaggerLoader';
 
-app.get('/', (req: Express.Request, res: Express.Response) => {
-  const data = { message: process.env.NODE_ENV };
-  res.send(data);
-});
+const log = new Logger(__filename);
+console.log(`${log.getScope()} ${__filename}`);
 
-const port = 8888;
-const host = 'localhost';
-
-app.listen(port, host, () => {
-  console.log(`Running on http://${host}:${port}`);
-});
+bootstrapMicroframework({
+  /**
+   * Loader is a place where you can configure all your modules during microframework
+   * bootstrap process. All loaders are executed one by one in a sequential order.
+   */
+  loaders: [
+    winstonLoader,
+    iocLoader,
+    expressLoader,
+    webpackLoader,
+    swaggerLoader,
+    monitorLoader,
+  ],
+})
+  .then(() => banner(log))
+  .catch((error) =>
+    log.error(
+      `Application is crashed during bootstrap process. Because: ${error}`
+    )
+  );
